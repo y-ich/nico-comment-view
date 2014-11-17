@@ -8,7 +8,7 @@ requires jQuery
  */
 
 (function() {
-  var NicoCommentWindow, vendorTransform;
+  var NicoCommentView, vendorTransform;
 
   vendorTransform = function(value) {
 
@@ -18,8 +18,8 @@ requires jQuery
     return "-webkit-transform: " + value + ";\n-moz-transform: " + value + ";\n-ms-transform: " + value + ";\n-o-transform: " + value + ";\ntransform: " + value + ";";
   };
 
-  NicoCommentWindow = (function() {
-    function NicoCommentWindow($target, $container, duration) {
+  NicoCommentView = (function() {
+    function NicoCommentView($target, $container, duration) {
       var containerOffset, targetOffset;
       this.duration = duration != null ? duration : 5;
 
@@ -43,7 +43,7 @@ requires jQuery
       $container.append(this.$window);
     }
 
-    NicoCommentWindow.prototype.comment = function(comment, callback) {
+    NicoCommentView.prototype.comment = function(comment, callback) {
       var $comment, transform;
       if (callback == null) {
         callback = null;
@@ -76,7 +76,7 @@ requires jQuery
       })(this), 100);
     };
 
-    NicoCommentWindow.prototype._commentTop = function(commentWidth, commentHeight) {
+    NicoCommentView.prototype._commentTop = function(commentWidth, commentHeight) {
 
       /*
       private method
@@ -104,7 +104,7 @@ requires jQuery
       return commentHeight * column;
     };
 
-    return NicoCommentWindow;
+    return NicoCommentView;
 
   })();
 

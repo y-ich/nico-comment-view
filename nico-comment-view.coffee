@@ -17,7 +17,7 @@ vendorTransform = (value) ->
     transform: #{value};
     """
 
-class NicoCommentWindow
+class NicoCommentView
     constructor: ($target, $container, @duration = 5) ->
         ###
         prepares overrap window for $target in $container.
