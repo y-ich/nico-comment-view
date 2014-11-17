@@ -32,7 +32,7 @@ requires jQuery
         throw new Error('$container need not to be static');
       }
       this.endTimes = [];
-      this.$window = $('<div class="nico-comment-window"></div>');
+      this.$window = $('<div class="nico-comment-view"></div>');
       this.width = $target.width();
       this.height = $target.height();
       this.$window.width(this.width);
