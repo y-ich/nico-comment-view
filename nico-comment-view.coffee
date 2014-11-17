@@ -67,6 +67,7 @@ class NicoCommentWindow
                 transition: #{transition}
                 """ + vendorTransform transform
         , 100 # changed transition property after rendering finished. 0 is not enough.
+        return
 
     _commentTop: (commentWidth, commentHeight) ->
         ###
