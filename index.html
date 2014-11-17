@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>ニコ動風コメント表示機能サンプル</title>
+    <link rel="stylesheet" href="nico-comment-view.css" />
+</head>
+<body>
+    <h1>ニコ動風コメント表示機能</h1>
+    <h2>使い方</h2>
+    jQueryが必要です。
+    <pre>
+    &lt;html&gt;
+    &lt;head&gt;
+    &lt;link rel="stylesheet" href="nico-comment-view.css" /&gt;
+    &lt;/head&gt;
+    &lt;script src="http://code.jquery.com/jquery-2.1.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="nico-comment-view.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+    var commentWindow = new NicoCommentWindow($('#target'), $('#container'));
+    commentWindow.comment('Hello World');
+    &lt;/script&gt;
+    &lt;/html&gt;
+    </pre>
+    <h2>サンプル</h2>
+    <div id="container" style="position: relative;">コンテナ
+    <div id="target" style="width: 500px; height: 500px; background-color: green;">ターゲット</div>
+    </div>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="nico-comment-view.js"></script>
+    <script type="text/javascript">
+    function rand(n) {
+        return Math.floor(Math.random() * n);
+    }
+    var commentWindow = new NicoCommentWindow($('#target'), $('#container'));
+    commentWindow.comment('Hello World', function() {
+        for (var i = 0; i < 10; i++) {
+            var clap = '88888888888888888888888888888888888888888888';
+            setTimeout(function() {
+                commentWindow.comment(clap.slice(0, 10 + rand(clap.length - 10)));
+            }, rand(10000));
+        }
+    });
+    </script>
+</body>
+</html>
