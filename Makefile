@@ -1,5 +1,5 @@
 .SUFFIXES: .coffee .js
-nico-comment-niew.js:
+nico-comment-view.js:
 
 doc:
 	coffeedoc -o docs .
