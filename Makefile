@@ -1,5 +1,5 @@
 .SUFFIXES: .coffee .js
-nico-comment-window.js:
+nico-comment-niew.js:
 
 .coffee.js:
 	coffee -c $^

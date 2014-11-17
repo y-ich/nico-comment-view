@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <title>ニコ動風コメント表示機能サンプル</title>
-    <link rel="stylesheet" href="nico-comment-window.css" />
+    <link rel="stylesheet" href="nico-comment-view.css" />
 </head>
 <body>
     <div id="container" style="position: relative;">コンテナ
     <div id="target" style="width: 500px; height: 500px; background-color: green;">ターゲット</div>
     </div>
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="nico-comment-window.js"></script>
+    <script src="nico-comment-view.js"></script>
     <script type="text/javascript">
     var commentWindow = new NicoCommentWindow($('#target'), $('#container'));
     commentWindow.comment('Hello World');
