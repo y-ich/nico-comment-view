@@ -1,9 +1,9 @@
-.nico-comment-window {
+.nico-comment-view {
   position: absolute;
   overflow: hidden;
   pointer-events: none;
 }
-.nico-comment-window .nico-comment {
+.nico-comment-view .nico-comment {
   position: absolute;
   z-index: 10;
   white-space: nowrap;

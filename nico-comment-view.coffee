@@ -27,7 +27,7 @@ class NicoCommentWindow
         if $container.css('position') is 'static'
             throw new Error '$container need not to be static'
         @endTimes = []
-        @$window = $('<div class="nico-comment-window"></div>')
+        @$window = $('<div class="nico-comment-view"></div>')
 
         # Fitting size and position
         @width = $target.width()
