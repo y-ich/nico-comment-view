@@ -87,4 +87,4 @@ class NicoCommentView
         @endTimes[column] = endTime
         commentHeight * column
 
-window.NicoCommentWindow = NicoCommentWindow
+window.NicoCommentView = NicoCommentView

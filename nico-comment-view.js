@@ -108,6 +108,6 @@ requires jQuery
 
   })();
 
-  window.NicoCommentWindow = NicoCommentWindow;
+  window.NicoCommentView = NicoCommentView;
 
 }).call(this);
