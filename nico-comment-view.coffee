@@ -24,21 +24,26 @@ class NicoCommentView
         Both $target and $container are jQuery objects.
         duration is a time to display a commment.
         ###
+        @endTimes = []
+
+        if not $container?
+            @$window = $target
+            return
+
         if $container.css('position') is 'static'
             throw new Error '$container need not to be static'
-        @endTimes = []
+
         @$window = $('<div class="nico-comment-view"></div>')
 
         # Fitting size and position
-        @width = $target.width()
-        @height = $target.height()
-        @$window.width @width
-        @$window.height @height
+        @$window.width $target.width()
+        @$window.height $target.height()
         containerOffset = $container.offset()
         targetOffset = $target.offset()
         @$window.css('left', targetOffset.left - containerOffset.left).css('top', targetOffset.top - containerOffset.top)
 
         $container.append @$window
+        return
 
     comment: (comment, callback = null) ->
         ###
@@ -46,7 +51,7 @@ class NicoCommentView
         callback would be called after finishing comment display.
         ###
         $comment = $("<div class=\"nico-comment\">#{comment}</div>")
-        transform = "translateX(#{@width}px)"
+        transform = "translateX(#{@$window.width()}px)"
         $comment.attr 'style', vendorTransform transform
         $comment.one 'oTransitionEnd mozTransitionEnd webkitTransitionEnd transitionend', ->
             $(this).remove()
@@ -74,7 +79,7 @@ class NicoCommentView
         private method
         ###
         time = new Date().getTime()
-        goalTime = time + Math.floor 1000 * @duration * @width / (@width + commentWidth)
+        goalTime = time + Math.floor 1000 * @duration * @$window.width() / (@$window.width() + commentWidth)
         endTime = time + @duration * 1000
         column = null
         for t, i in @endTimes
@@ -82,8 +87,8 @@ class NicoCommentView
                 column = i
                 break
         column ?= i
-        if commentHeight * column > @height - commentHeight # if all columns are busy
-            column = Math.floor Math.random() * Math.floor @height / commentHeight
+        if commentHeight * column > @$window.height() - commentHeight # if all columns are busy
+            column = Math.floor Math.random() * Math.floor @$window.height() / commentHeight
         @endTimes[column] = endTime
         commentHeight * column
 

@@ -28,19 +28,22 @@ requires jQuery
       Both $target and $container are jQuery objects.
       duration is a time to display a commment.
        */
+      this.endTimes = [];
+      if ($container == null) {
+        this.$window = $target;
+        return;
+      }
       if ($container.css('position') === 'static') {
         throw new Error('$container need not to be static');
       }
-      this.endTimes = [];
       this.$window = $('<div class="nico-comment-view"></div>');
-      this.width = $target.width();
-      this.height = $target.height();
-      this.$window.width(this.width);
-      this.$window.height(this.height);
+      this.$window.width($target.width());
+      this.$window.height($target.height());
       containerOffset = $container.offset();
       targetOffset = $target.offset();
       this.$window.css('left', targetOffset.left - containerOffset.left).css('top', targetOffset.top - containerOffset.top);
       $container.append(this.$window);
+      return;
     }
 
     NicoCommentView.prototype.comment = function(comment, callback) {
@@ -54,7 +57,7 @@ requires jQuery
       callback would be called after finishing comment display.
        */
       $comment = $("<div class=\"nico-comment\">" + comment + "</div>");
-      transform = "translateX(" + this.width + "px)";
+      transform = "translateX(" + (this.$window.width()) + "px)";
       $comment.attr('style', vendorTransform(transform));
       $comment.one('oTransitionEnd mozTransitionEnd webkitTransitionEnd transitionend', function() {
         $(this).remove();
@@ -83,7 +86,7 @@ requires jQuery
        */
       var column, endTime, goalTime, i, t, time, _i, _len, _ref;
       time = new Date().getTime();
-      goalTime = time + Math.floor(1000 * this.duration * this.width / (this.width + commentWidth));
+      goalTime = time + Math.floor(1000 * this.duration * this.$window.width() / (this.$window.width() + commentWidth));
       endTime = time + this.duration * 1000;
       column = null;
       _ref = this.endTimes;
@@ -97,8 +100,8 @@ requires jQuery
       if (column == null) {
         column = i;
       }
-      if (commentHeight * column > this.height - commentHeight) {
-        column = Math.floor(Math.random() * Math.floor(this.height / commentHeight));
+      if (commentHeight * column > this.$window.height() - commentHeight) {
+        column = Math.floor(Math.random() * Math.floor(this.$window.height() / commentHeight));
       }
       this.endTimes[column] = endTime;
       return commentHeight * column;
