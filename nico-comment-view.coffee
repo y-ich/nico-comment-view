@@ -50,6 +50,8 @@ class NicoCommentView
         displays comment.
         callback would be called after finishing comment display.
         ###
+        if document.hidden
+            return
         $comment = $("<div class=\"nico-comment\">#{comment}</div>")
         transform = "translateX(#{@$window.width()}px)"
         $comment.attr 'style', vendorTransform transform
