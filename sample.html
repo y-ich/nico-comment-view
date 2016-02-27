@@ -12,8 +12,13 @@
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="nico-comment-view.js"></script>
     <script type="text/javascript">
+    var comments = ['Hello World', '風呂入ってくる', '８８８８８８８８', 'ｗｗｗ', 'これあかんやつや'];
     var commentView = new NicoCommentView($('#target'), $('#container'));
-    commentView.comment('Hello World');
+    for (i = 0; i < 30; i++) {
+        setTimeout(function() {
+            commentView.comment(comments[Math.floor(Math.random() * comments.length)]);
+        }, Math.floor(Math.random() * 5000));
+    }
     </script>
 </body>
 </html>

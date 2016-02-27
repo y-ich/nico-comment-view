@@ -24,7 +24,7 @@ class NicoCommentView
         Both $target and $container are jQuery objects.
         duration is a time to display a commment.
         ###
-        @endTimes = []
+        @times = []
 
         if not $container?
             @$window = $target
@@ -81,17 +81,23 @@ class NicoCommentView
         private method
         ###
         time = new Date().getTime()
-        goalTime = time + Math.floor 1000 * @duration * @$window.width() / (@$window.width() + commentWidth)
+        windowWidth = @$window.width()
+        speed = (windowWidth + commentWidth) / (1000 * @duration) # px/ms
+        startEndTime = time + Math.floor commentWidth / speed
+        goalTime = time + Math.floor windowWidth / speed
         endTime = time + @duration * 1000
         column = null
-        for t, i in @endTimes
-            if not t? or t < goalTime
+        for t, i in @times
+            if not t? or (t.startEndTime < time and t.endTime < goalTime)
                 column = i
                 break
         column ?= i
-        if commentHeight * column > @$window.height() - commentHeight # if all columns are busy
-            column = Math.floor Math.random() * Math.floor @$window.height() / commentHeight
-        @endTimes[column] = endTime
+        windowHeight = @$window.height()
+        if commentHeight * column > windowHeight - commentHeight # if all columns are busy
+            column = Math.floor Math.random() * Math.floor windowHeight / commentHeight
+        @times[column] =
+            startEndTime: startEndTime
+            endTime: endTime
         commentHeight * column
 
 window.NicoCommentView = NicoCommentView
